@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc9f86ae-8bf3-49fb-89ed-e422cf3eb5a5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="D" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     dailyreport.`SellId` AS dailyreport_SellId,
+     dailyreport.`DateSell` AS dailyreport_DateSell,
+     dailyreport.`Total_Price` AS dailyreport_Total_Price,
+     dailyreport.`Received_Money` AS dailyreport_Received_Money,
+     dailyreport.`Changed` AS dailyreport_Changed,
+     dailyreport.`EmpName` AS dailyreport_EmpName
+FROM
+     `dailyreport` dailyreport
+
+WHERE 
+      DateSell = $P{D}]]>
+	</queryString>
+	<field name="dailyreport_SellId" class="java.lang.Integer"/>
+	<field name="dailyreport_DateSell" class="java.sql.Timestamp"/>
+	<field name="dailyreport_Total_Price" class="java.lang.Integer"/>
+	<field name="dailyreport_Received_Money" class="java.lang.Integer"/>
+	<field name="dailyreport_Changed" class="java.lang.Integer"/>
+	<field name="dailyreport_EmpName" class="java.lang.String"/>
+	<variable name="Total_Sell_Price" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{dailyreport_Total_Price}]]></variableExpression>
+	</variable>
+	<variable name="Total_Recieved_Money" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{dailyreport_Received_Money}]]></variableExpression>
+	</variable>
+	<variable name="Total_Changed" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{dailyreport_Changed}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="63" splitType="Stretch">
+			<staticText>
+				<reportElement x="92" y="11" width="166" height="34" uuid="bdadc15d-9f10-4dd4-b997-9a6866422729"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="14"/>
+				</textElement>
+				<text><![CDATA[ລາຍ​ງານ​ການ​ຂາຍ​ປະ​ຈຳ​ວັນ​ທີ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="291" y="11" width="144" height="34" uuid="461f093d-a5bf-4999-9119-982452991928"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dailyreport_DateSell}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="223" y="10" width="100" height="20" uuid="dae82100-862c-4830-8f29-7b93d4de99b7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[​ເງີນ​ທີ່​ໄດ້​ຮັບ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="10" width="100" height="20" uuid="858417e6-9f71-4a65-aa31-53a0391a42f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[​ພະ​ນັກ​ງານ​ທີ່​ຂາຍ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="10" width="100" height="20" uuid="d249476c-44aa-449c-b92f-7223ebd579cb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[ລາ​ຄາ​ທັງ​ຫມົດ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="10" width="100" height="20" uuid="5cbe5b07-aac0-4315-a1f6-a4cb71ea3aeb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[​ເງີນ​ທອນ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="20" uuid="f0612398-64f9-417f-86e7-7f580a5edf2c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[ເລກ​ທີ​ໃບ​ບິນ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="223" y="0" width="100" height="20" uuid="4a3b9d64-e32c-41c2-b0be-a4aadba4cb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dailyreport_Received_Money}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="455" y="0" width="100" height="20" uuid="04aa5951-70e1-4f1b-8aae-53ee99769879"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dailyreport_EmpName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="100" y="0" width="100" height="20" uuid="20c1389b-3221-472c-9e06-73c66e6437a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dailyreport_Total_Price}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="335" y="0" width="100" height="20" uuid="cded4222-5cdb-44b8-b3d2-0502a4592b8a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dailyreport_Changed}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement x="0" y="0" width="100" height="20" uuid="b8b4861b-a647-4b97-be42-cb6007531fbd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dailyreport_SellId}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="16" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="10" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="122" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="308" y="13" width="100" height="20" uuid="feb94b8b-9da8-42ca-8793-55f4f7b4e2d4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Total_Sell_Price}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="308" y="50" width="100" height="20" uuid="43ab5a17-cbab-456b-a6d9-7810c7fb3b2c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Total_Recieved_Money}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="308" y="85" width="100" height="20" uuid="f663d706-f654-4645-85b0-b615c456f553"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Total_Changed}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="6d977016-f686-4a83-84b7-4dad40aa8b16"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="13" width="138" height="20" uuid="d1802054-e3a3-46fb-bbfc-4cc7d24dbd05"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[ລວມ​ການ​ລາຍ​ງານປະ​ຈຳ​ວັນ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="13" width="100" height="20" uuid="910744d0-d3f0-4f50-aed4-f350ec3a8f8f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[ລວມ​ລາ​ຄາ​ທີ່​ໄດ້​ຂາຍ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="50" width="100" height="20" uuid="34c09d24-8488-4ea5-af95-8d992eb864dc"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[ເງີນ​ທີ່​ໄດ້​ຮັບ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="85" width="100" height="20" uuid="8ac89c83-af64-40c2-afc3-733d5cdcd43e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[​ເງີນ​ທີ່​ທອນ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="13" width="16" height="20" uuid="1b669f1b-7a48-4ce2-b7c7-6e01d81b1587"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[ກີບ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="50" width="16" height="20" uuid="6584c38e-22fc-4490-a7a9-4751a3b98aad"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[ກີບ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="85" width="16" height="20" uuid="d05d2ee6-4d51-47f3-b958-d72fa3d32d9f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Saysettha OT" size="12"/>
+				</textElement>
+				<text><![CDATA[ກີບ]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
